@@ -37,10 +37,10 @@ import Data.Char (isAlphaNum, isDigit, toLower, digitToInt)
 -- A1
 esPalindromo :: String -> Bool
 esPalindromo x
-    | onlyAlphaNum x == onlyAlphaNum (reverseString []) x == True = True
+    | onlyAlphaNum x == onlyAlphaNum (reverseString [] x) = True
     | otherwise = False
 
-onlyAlphaNum :: string -> string
+onlyAlphaNum :: String -> String
 onlyAlphaNum [] = []
 onlyAlphaNum (x:xs)
     | isAlphaNum x = toLower(x) : onlyAlphaNum xs
