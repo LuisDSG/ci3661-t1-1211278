@@ -60,10 +60,10 @@ mayorYMenor (x:xs) = Just (auxMYM (x, x) xs)
 
 auxMYM :: Ord a => (a, a) -> [a] -> (a, a)
 auxMYM (a, b) [] = (a, b)
-auxMYM (a,b) (x:xs)
-| x > a = auxMYM(x, b) xs
-| x < b = auxMYM(a, x) xs
-| otherwise = auxMYM (a, b) xs
+auxMYM (a, b) (x:xs)
+    | x > a = auxMYM (x, b) xs
+    | x < b = auxMYM (a, x) xs
+    | otherwise = auxMYM (a, b) xs
 
 Porque solo puede tomar un valor mayor o menor para la tupla (a, b) si haya una en la lista que sea mayor o menor
 que la que ya tiene del recorrido anterior.
