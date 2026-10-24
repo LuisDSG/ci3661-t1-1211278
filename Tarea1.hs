@@ -5,7 +5,7 @@
 --  Carnet: 12-11287
 --
 --  Declaración de uso de herramientas de IA (obligatoria, ver enunciado): 
-      Se usa Qwen y Deepseek para la explicación de sintáxis del lenguaje Haskell, verificación de funcionamiento de código, conceptos, instrucciones y estructuras más pequeñas para la construcción de las soluciones de los problemas.
+      Se usa Qwen, Gemini y Deepseek para la explicación de sintáxis del lenguaje Haskell, verificación de funcionamiento de código, conceptos, instrucciones y estructuras más pequeñas para la construcción de las soluciones de los problemas.
       No se ha hecho uso de agentes de programación.
 --
 -- =====================================================================
@@ -55,8 +55,15 @@ reverseString tempList (x:xs) = reverseString (x:tempList) xs
 -- lista una sola vez:
 --
 mayorYMenor :: Ord a => [a] -> Maybe (a, a)
-mayorYMenor (_ , _) [] = Nothing 
-mayorYMenor (a, b) [x:xs]= mayorYMenor ((if a >= x then a else x), (if b <= x then b else x)) [xs]
+mayorYMenor [] = Nothing 
+mayorYMenor (x:xs) = just (auxMYM (x, x) (x:xs))
+
+auxMYM :: (a, a) -> [a] -> (a, a)
+auxMYM (a, b) [] = (a, b)
+auxMYM (a,b) (x:xs)
+| x > a = auxMYM(x, b) xs
+| x < b = auxMYM(a, x) xs
+| otherwise = auxMYM (a, b) xs
 
 Porque sólo puede tomar un valor mayor o menor para la tupla (a, b) si haya una en la lista que sea mayor o menor
 que la que ya tiene del recorrido anterior.
