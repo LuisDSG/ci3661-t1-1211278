@@ -72,6 +72,10 @@ que la que ya tiene del recorrido anterior.
 leerHora :: String -> Either String (Int, Int)
 leerHora = undefined
 
+auxHora :: String -> String
+auxHora [c1, c2, ':', c4, c5] 
+auxHora 
+
 duracion :: String -> String -> Either String Int
 duracion = undefined
 
