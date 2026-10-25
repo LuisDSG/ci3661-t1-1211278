@@ -70,15 +70,19 @@ que la que ya tiene del recorrido anterior.
 
 -- A3
 leerHora :: String -> Either String (Int, Int)
-leerHora = undefined
-
-auxHora :: String -> String
-auxHora [c1, c2, ':', c4, c5] 
-auxHora 
+leerHora [c1, c2, ':', c4, c5]
+| isDigit c1  && isDigit c2 && isDigit c4 && isDigit c5 ->
+        if ( digitToInt (c1 * 10) + digitToInt c2 > 23)
+            then Left "hora fuera de rango"
+            else if ( digitToInt (c4 * 10) + digitToInt c5 > 59)
+                then Left "minutos fuera de rango"
+                else Right ( digitToInt (c1 * 10) + digitToInt c2, digitToInt (c4*10) + digitToInt c5 )
+leerHora _ = Left "invalid format
 
 duracion :: String -> String -> Either String Int
 duracion = undefined
 
+ s = undefined
 -- =====================================================================
 -- Parte B: orden superior.
 -- Prohibido: recursión explícita (ninguna función de esta parte, ni sus
