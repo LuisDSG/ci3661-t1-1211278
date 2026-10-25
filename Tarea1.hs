@@ -71,13 +71,14 @@ que la que ya tiene del recorrido anterior.
 -- A3
 leerHora :: String -> Either String (Int, Int)
 leerHora [c1, c2, ':', c4, c5]
-| isDigit c1  && isDigit c2 && isDigit c4 && isDigit c5 ->
-        if ( digitToInt (c1 * 10) + digitToInt c2 > 23)
-            then Left "hora fuera de rango"
-            else if ( digitToInt (c4 * 10) + digitToInt c5 > 59)
-                then Left "minutos fuera de rango"
-                else Right ( digitToInt (c1 * 10) + digitToInt c2, digitToInt (c4*10) + digitToInt c5 )
+    | not (isDigit c1  && isDigit c2 && isDigit c4 && isDigit c5) = Left "invalid format"
+    | h > 23 = Left "hora fuera de rango"
+    | m > 59 = Left "minutos fuera de rango"
+    | otherwise = Right (h, m)
 leerHora _ = Left "invalid format
+    where 
+    h = digitToInt (c1 * 10) + digitToInt c2
+    m = digitToInt (c4 * 10) + digitToInt c5
 
 duracion :: String -> String -> Either String Int
 duracion = undefined
