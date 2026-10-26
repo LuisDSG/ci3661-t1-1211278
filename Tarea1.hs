@@ -101,10 +101,11 @@ promedioSobreUmbral b xs =
     let (s, n) = foldr sumaSobreUmbral(0, 0) xs
     in if n == 0 then Nothing
     else Just (s / fromIntegral n)
-    where
-        sumaSobreUmbral (s, n) x
-            | x > b = (s + x, n + 1)
-            | otherwise = (s, n)
+
+sumaSobreUmbral :: (Double, Int) -> Double -> (Double, Int)
+sumaSobreUmbral (s, n) x
+    | x > b = (s + x, n + 1)
+    | otherwise = (s, n)
 
 -- B2
 movimientosCaballo :: (Int, Int) -> [(Int, Int)]
