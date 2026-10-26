@@ -98,14 +98,13 @@ duracion p1 p2 = case leerHora p1 of
 -- B1
 promedioSobreUmbral :: Double -> [Double] -> Maybe Double
 promedioSobreUmbral b xs =
-    let (s, n) = foldr sumaSobreUmbral(0, 0) xs
-    in if n == 0 then Nothing
-    else Just (s / fromIntegral n)
-
-sumaSobreUmbral :: (Double, Int) -> Double -> (Double, Int)
-sumaSobreUmbral (s, n) x
-    | x > b = (s + x, n + 1)
-    | otherwise = (s, n)
+    let (s, n) = foldr sumaSobreUmbral (0, 0) xs
+    in if n == 0 then Nothing else Just (s / fromIntegral n)
+    where
+        sumaSobreUmbral :: Double -> (Double, Int) -> (Double, Int)
+        sumaSobreUmbral x (s, n)
+            | x > b     = (s + x, n + 1)
+            | otherwise = (s, n)
 
 -- B2
 movimientosCaballo :: (Int, Int) -> [(Int, Int)]
