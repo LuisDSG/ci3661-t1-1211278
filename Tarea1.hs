@@ -81,7 +81,17 @@ leerHora [c1, c2, ':', c4, c5]
 leerHora _ = Left "formato invalido"
 
 duracion :: String -> String -> Either String Int
-duracion = undefined
+duracion [c1, c2, ':', c4, c5] [d1, d2, ':', d4, d5]
+    | not (isDigit c1  && isDigit c2 && isDigit c4 && isDigit c5) && not (isDigit d1  && isDigit d2 && isDigit d4 && isDigit d5) = Left "formato invalido"
+    | h > 23 = Left "hora fuera de rango"
+    | m > 59 = Left "minutos fuera de rango"
+    | otherwise if h1 < h2 then Right ((h2-h1-1)*60 )
+    where
+        h1 = digitToInt c1 * 10 + digitToInt c2
+        h2 = digitToInt d1 * 10 + digitToInt d2
+        m1 = digitToInt c4 * 10 + digitToInt c5
+        m2 = digitToInt d4 * 10 + digitToInt d5
+duracion _ = Left "formato invalido"
 
  s = undefined
 -- =====================================================================
